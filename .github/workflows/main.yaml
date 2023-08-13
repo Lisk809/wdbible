@@ -11,7 +11,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: "16"
 
       - name: Execute commands
         run: |
@@ -21,8 +21,7 @@ jobs:
 
       - name: Commit and push if changes
         run: |
-          git config --local user.email "action@github.com" && git config --local user.name "GitHub Action"
           git add -A
-          git commit -m 'Auto update from github actions' && git push origin main
+          git config --local user.email "action@github.com" && git config --local user.name "GitHub Action" && git commit -m 'Auto update from github actions' && git push origin HEAD
         env:
-              MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+          MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
