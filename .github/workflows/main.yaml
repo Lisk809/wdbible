@@ -18,6 +18,7 @@ jobs:
       run: |
         yarn
         node app.js
+        rm -rf apks/*
         wget `cat url.txt` -O dist/apks/wdbible.apk
 
     - name: Commit and push if changes
