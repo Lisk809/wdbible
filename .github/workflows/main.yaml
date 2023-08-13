@@ -1,18 +1,25 @@
-steps:
-    - uses: actions/checkout@v2
+name: Push to branch
 
-    - name: Use Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'
-        
-    - name: Execute commands
-      run: |
-        yarn || echo "yarn failed"
-        rm -rf apks/* || echo "node app.js failed"
-        wget `node app.js` -O apks/wdbible.apk || echo "wget failed"
+on: [push]
 
-    - name: Commit and push if changes
-      run: |
-        git add -A
-        git diff --quiet && git diff --staged --quiet || (git commit -m 'Auto update from github actions' && git push origin HEAD)
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Execute commands
+        run: |
+          yarn || echo "yarn failed"
+          rm -rf apks/* || echo "node app.js failed"
+          wget `node app.js` -O apks/wdbible.apk || echo "wget failed"
+
+      - name: Commit and push if changes
+        run: |
+          git add -A
+          git diff --quiet && git diff --staged --quiet || (git commit -m 'Auto update from github actions' && git push origin HEAD)
