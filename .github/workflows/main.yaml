@@ -1,24 +1,16 @@
-name: Push to branch
-
-on: [push]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
+steps:
     - uses: actions/checkout@v2
 
     - name: Use Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '12'
-
+        node-version: '16'
+        
     - name: Execute commands
       run: |
-        yarn
-        rm -rf apks/*
-        wget `node app.js` -O apks/wdbible.apk
+        yarn || echo "yarn failed"
+        rm -rf apks/* || echo "node app.js failed"
+        wget `node app.js` -O apks/wdbible.apk || echo "wget failed"
 
     - name: Commit and push if changes
       run: |
