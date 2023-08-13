@@ -16,10 +16,10 @@ jobs:
       - name: Execute commands
         run: |
           yarn || echo "yarn failed"
-          rm -rf apks/* || echo "node app.js failed"
+          rm -rf apks/* || echo "rm failed"
           wget `node app.js` -O apks/wdbible.apk || echo "wget failed"
 
       - name: Commit and push if changes
         run: |
           git add -A
-          git diff --quiet && git diff --staged --quiet || (git commit -m 'Auto update from github actions' && git push origin HEAD)
+          git commit -m 'Auto update from github actions' && git push origin main
