@@ -22,6 +22,6 @@ jobs:
       - name: Commit and push if changes
         run: |
           git add -A
-          git config --local user.email "action@github.com" && git config --local user.name "GitHub Action" && git commit -m 'Auto update from github actions' && git push origin HEAD
+          git diff --quiet && git diff --staged --quiet || (git config --local user.email "action@github.com" && git config --local user.name "GitHub Action" && git commit -m 'Auto update from github actions' && git remote set-url origin https://${{ secrets.MY_GITHUB_TOKEN }}@github.com/lisk809/wdbible.git && git push origin HEAD)
         env:
           MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
