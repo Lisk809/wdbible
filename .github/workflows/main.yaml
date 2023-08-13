@@ -21,7 +21,8 @@ jobs:
 
       - name: Commit and push if changes
         run: |
-          git config --global user.email "liskqwq@gmail.com"
-          git config --global user.name "Lisk"
+          git config --local user.email "action@github.com" && git config --local user.name "GitHub Action"
           git add -A
           git commit -m 'Auto update from github actions' && git push origin main
+        env:
+              MY_GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
