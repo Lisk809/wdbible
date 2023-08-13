@@ -17,9 +17,8 @@ jobs:
     - name: Execute commands
       run: |
         yarn
-        node app.js
         rm -rf apks/*
-        wget `cat url.txt` -O dist/apks/wdbible.apk
+        wget `node app.js` -O apks/wdbible.apk
 
     - name: Commit and push if changes
       run: |
