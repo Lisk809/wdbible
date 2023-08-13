@@ -16,7 +16,7 @@ jobs:
       - name: Execute commands
         run: |
           yarn || echo "yarn failed"
-          rm -rf apks/* || echo "rm failed"
+          mkdir apks || echo "mkdir failed"
           wget `node app.js` -O apks/wdbible.apk || echo "wget failed"
 
       - name: Commit and push if changes
